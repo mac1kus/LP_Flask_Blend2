@@ -340,7 +340,7 @@ def analyze_grade_infeasibility(grade_name, grade_idx, grades_data, components_d
 
                 if test_max_val is not None and not math.isinf(test_max_val):
                     weighted_sum = lpSum([property_value.get((test_prop, comp), 0) * test_blend[comp] for comp in components])
-                    test_model += weighted_sum <= test_max_val * total, f"{grade_name}_{test_prop}_Max_Test"
+                    test_model += weighted_sum <= test_max_val * test_total, f"{grade_name}_{test_prop}_Max_Test"
 
             test_model.solve(PULP_CBC_CMD(msg=0))
 
@@ -1129,6 +1129,7 @@ if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     print(f"Starting Flask app on port {port}")
     app.run(host="0.0.0.0", port=port, debug=True)
+
 
 
 
